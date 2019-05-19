@@ -1,0 +1,780 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="materi data mining">
+      
+      
+        <link rel="canonical" href="https://nurulfajriyatussihah.github.io/datamining/getting-started/">
+      
+      
+        <meta name="author" content="nurul fajriyatus sihah">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.2.0">
+    
+    
+      
+        <title>Algoritma K-Means Clustering - Data mining</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/application.750b69bd.css">
+      
+        <link rel="stylesheet" href="../assets/stylesheets/application-palette.224b79ff.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#3f51b5">
+      
+    
+    
+      <script src="../assets/javascripts/modernizr.74668098.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../assets/fonts/material-icons.css">
+    
+    
+    
+      
+        
+<script>
+  window.ga = window.ga || function() {
+    (ga.q = ga.q || []).push(arguments)
+  }
+  ga.l = +new Date
+  /* Setup integration and send page view */
+  ga("create", "None", "auto")
+  ga("set", "anonymizeIp", true)
+  ga("send", "pageview")
+  /* Register handler to log search on blur */
+  document.addEventListener("DOMContentLoaded", () => {
+    if (document.forms.search) {
+      var query = document.forms.search.query
+      query.addEventListener("blur", function() {
+        if (this.value) {
+          var path = document.location.pathname;
+          ga("send", "pageview", path + "?q=" + this.value)
+        }
+      })
+    }
+  })
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="__github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#algoritma-k-means-clustering" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://nurulfajriyatussihah.github.io/datamining" title="Data mining" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              Data mining
+            </span>
+            <span class="md-header-nav__topic">
+              Algoritma K-Means Clustering
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/nurulfajriyatussihah/datamining" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    nurulfajriyatussihah/datamining
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+        
+
+<nav class="md-tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  <li class="md-tabs__item">
+    
+      <a href=".." title="Teori dan dan Cara Kerja Algoritma KNN (K-NEAREST NEIGHBOUR)" class="md-tabs__link md-tabs__link--active">
+        Teori dan dan Cara Kerja Algoritma KNN (K-NEAREST NEIGHBOUR)
+      </a>
+    
+  </li>
+
+      
+        
+      
+        
+      
+    </ul>
+  </div>
+</nav>
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://nurulfajriyatussihah.github.io/datamining" title="Data mining" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    Data mining
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/nurulfajriyatussihah/datamining" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    nurulfajriyatussihah/datamining
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href=".." title="Teori dan dan Cara Kerja Algoritma KNN (K-NEAREST NEIGHBOUR)" class="md-nav__link">
+      Teori dan dan Cara Kerja Algoritma KNN (K-NEAREST NEIGHBOUR)
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Algoritma K-Means Clustering
+      </label>
+    
+    <a href="./" title="Algoritma K-Means Clustering" class="md-nav__link md-nav__link--active">
+      Algoritma K-Means Clustering
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#pengertian-k-means-clustering" title="Pengertian K-Means Clustering" class="md-nav__link">
+    Pengertian K-Means Clustering
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#algoritma-k-means" title="Algoritma K-Means" class="md-nav__link">
+    Algoritma K-Means
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#langkah-langkah-menginstal-library" title="Langkah-langkah menginstal library:" class="md-nav__link">
+    Langkah-langkah menginstal library:
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#langkah-langkah-implementasi" title="Langkah-langkah implementasi" class="md-nav__link">
+    Langkah-langkah implementasi
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hasil-tampilan-dataset" title="Hasil tampilan dataset :" class="md-nav__link">
+    Hasil tampilan dataset :
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hasil-plot" title="Hasil plot :" class="md-nav__link">
+    Hasil plot :
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../customization/" title="Decision tree" class="md-nav__link">
+      Decision tree
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#pengertian-k-means-clustering" title="Pengertian K-Means Clustering" class="md-nav__link">
+    Pengertian K-Means Clustering
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#algoritma-k-means" title="Algoritma K-Means" class="md-nav__link">
+    Algoritma K-Means
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#langkah-langkah-menginstal-library" title="Langkah-langkah menginstal library:" class="md-nav__link">
+    Langkah-langkah menginstal library:
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#langkah-langkah-implementasi" title="Langkah-langkah implementasi" class="md-nav__link">
+    Langkah-langkah implementasi
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hasil-tampilan-dataset" title="Hasil tampilan dataset :" class="md-nav__link">
+    Hasil tampilan dataset :
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hasil-plot" title="Hasil plot :" class="md-nav__link">
+    Hasil plot :
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="algoritma-k-means-clustering">Algoritma K-Means Clustering<a class="headerlink" href="#algoritma-k-means-clustering" title="Permanent link">&para;</a></h1>
+<h2 id="pengertian-k-means-clustering">Pengertian K-Means Clustering<a class="headerlink" href="#pengertian-k-means-clustering" title="Permanent link">&para;</a></h2>
+<p>K-Means Clustering adalah suatu metode penganalisaan data atau metode 
+data mining yang melakukan proses pemodelan tanpa supervisi(unsupersid) 
+dan merupakan salah satu metode yang melakukan pengelompokkan data 
+dengan sistem partisi.</p>
+<h2 id="algoritma-k-means">Algoritma K-Means<a class="headerlink" href="#algoritma-k-means" title="Permanent link">&para;</a></h2>
+<p>Algoritma untuk melakukan K-Means <em>clustering</em> adalah sebagai berikut:</p>
+<ol>
+<li>Pilih K buah titik <em>centroid</em> secara acak</li>
+<li>Kelompokkan data sehingga terbentuk K buah <em>cluster</em> dengan titik <em>centroid</em> dari setiap <em>cluster</em> merupakan titik <em>centroid</em> yang telah dipilih sebelumnya</li>
+<li>Perbaharui nilai titik <em>centroid</em></li>
+<li>Ulangi langkah 2 dan 3 sampai nilai dari titik <em>centroid</em> tidak lagi berubah</li>
+</ol>
+<p>Proses pengelompokkan data ke dalam suatu <em>cluster</em> dapat dilakukan dengan cara menghitung jarak terdekat dari suatu data ke sebuah titik <em>centroid</em>.   Perhitungan jarak Minkowski dapat digunakan untuk menghitung jarak   antar 2 buah data. Rumus untuk menghitung jarak tersebut adalah</p>
+<p><img alt="" src="../assets/images/image1.PNG" /></p>
+<p>Dimana:</p>
+<p>​           g = 1, untuk menghitung jarak Manhattan</p>
+<p>​           g = 2, untuk menghitung jarak Euclidean</p>
+<p>​           g = ∞, untuk menghitung jarak Chebychev</p>
+<p>​           xi , xj adalah dua buah data yang akan dihitung jaraknya</p>
+<p>​           p = dimensi dari sebuah data</p>
+<p>Pembaharuan suatu titik centroid dapat dilakukan dengan rumus berikut:</p>
+<p><img alt="" src="../assets/images/image2.PNG" /></p>
+<p>Di mana:</p>
+<p>µk = titik centroid dari cluster ke-K</p>
+<p>Nk = banyaknya data pada cluster ke-K</p>
+<p>xq = data ke-q pada cluster ke-K</p>
+<h2 id="langkah-langkah-menginstal-library">Langkah-langkah menginstal library:<a class="headerlink" href="#langkah-langkah-menginstal-library" title="Permanent link">&para;</a></h2>
+<p>Install pandas </p>
+<pre class="codehilite"><code class="language-python">pip install pandas</code></pre>
+
+<p>Install numpy</p>
+<pre class="codehilite"><code>pip install numpy</code></pre>
+
+<p>Install matplotlib</p>
+<pre class="codehilite"><code class="language-python">pip install matplotlib</code></pre>
+
+<p>Install sklearn</p>
+<pre class="codehilite"><code class="language-python">pip install sklearn</code></pre>
+
+<h2 id="langkah-langkah-implementasi">Langkah-langkah implementasi<a class="headerlink" href="#langkah-langkah-implementasi" title="Permanent link">&para;</a></h2>
+<p>Mengimpor library , dimana library digunakan untuk mendukung implementai
+k-means clustering dan untuk membaca suatu file yang akan di importkan.</p>
+<pre class="codehilite"><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+from sklearn.cluster import KMeans
+from sklearn.preprocessing import MinMaxScaler</code></pre>
+
+<p>Mengimpor dataset, dimana dataset digunakan untuk implementasi k-means clustering </p>
+<pre class="codehilite"><code class="language-python">dataset = pd.read_csv('Pengunjung_mall.csv')</code></pre>
+
+<p>Melakukan <em>slicing,</em> dari dataset yang dimiliki. Kita hanya memerlukan kolom ke 3 (pendapatan) dan 4 (rating pengeluaran) saja</p>
+<pre class="codehilite"><code class="language-python">X = dataset.iloc[:, [3, 4]].values</code></pre>
+
+<p>Melakukan prediksi seperti apa pengelompokan klusternya jika kita pilih 
+K=3. Kita siapkan objek y_kmeans (tentu saja pemilihan nama ini bebas) 
+dengan <em>method</em> bukan <em>fit</em> melainkan <em>fit_predict</em> terhadap variabel X yang sudah didefinisikan.</p>
+<pre class="codehilite"><code class="language-python">kmeans = KMeans(n_clusters = 3, init = 'k-means++', max_iter=100, n_init=10, random_state = 0)
+y_kmeans = kmeans.fit_predict(X)
+dataset["Class"] = y_kmeans
+print(dataset) </code></pre>
+
+<p>Melakukan perintah untuk menampilkan semua data poin yang masuk ke cluster 1.</p>
+<ul>
+<li>Berikut penjelasan detailnya:</li>
+</ul>
+<p>Kita ingin menampilkan scatter plot, sehingga perintahnya adalah   plt.scatter. Parameter untuk plt.scatter adalah sumbu x, kemudian   diikuti sumbu y nya. Sumbu x adalah pendapatan tahunan, dan sumbu y   adalah rating pengeluaran. Sumbu x dan y nya dari objek X yang   didefinisikan di line 8.</p>
+<p>Kemudian untuk sumbu x nya ditulis <code>X[y_kmeans ==</code> <code>0, 0]</code>  artinya data poin nya berasal dari objek X. Penulisan  <code>y_kmeans ==</code> <code>0</code>  adalah untuk mewakili baris X yang dipilih, yaitu baris yang clusternya masuk ke cluster 1 (urutan dimulai dari nol).</p>
+<p>Untuk kolomnya mudah saja, karena ia adalah data penghasilan tahunan,   maka kolom 1 objek X yang kita pilih, sehingga penulisannya setelah  <code>y_kmeans ==</code> <code>0</code> adalah koma, kemudian diikuti nol.</p>
+<p>Untuk sumbu y nya, ditulis  <code>X[y_kmeans ==</code> <code>0, 1]</code> di mana bisa langsung dilihat bahwa kolom untuk rating pengeluaran rutin adalah kolom ke 2, ditulis 1 di python.</p>
+<p>Begitu seterusnya sampai kluster ketiga.</p>
+<pre class="codehilite"><code class="language-python">plt.scatter(X[y_kmeans == 0, 0], X[y_kmeans == 0, 1], s = 100, c = 'red', label = 'Cluster 1')
+plt.scatter(X[y_kmeans == 1, 0], X[y_kmeans == 1, 1], s = 100, c = 'blue', label = 'Cluster 2')
+plt.scatter(X[y_kmeans == 2, 0], X[y_kmeans == 2, 1], s = 100, c = 'green', label = 'Cluster 3')
+plt.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1], s = 300, c = 'yellow', label = 'Centroids')
+plt.title('Clusters pelanggan')
+plt.xlabel('Pendapatan tahunan (juta Rupiah)')
+plt.ylabel('Rating pengeluaran (1-100)')
+plt.legend()
+plt.show()</code></pre>
+
+<h2 id="hasil-tampilan-dataset">Hasil tampilan dataset :<a class="headerlink" href="#hasil-tampilan-dataset" title="Permanent link">&para;</a></h2>
+<pre class="codehilite"><code class="language-python">IDPelanggan    Kelamin  Usia  Pendapatan (juta Rp)  \
+0              1       Laki    19                    15   
+1              2       Laki    21                    15   
+2              3  Perempuan    20                    16   
+3              4  Perempuan    23                    16   
+4              5  Perempuan    31                    17   
+5              6  Perempuan    22                    17   
+6              7  Perempuan    35                    18   
+7              8  Perempuan    23                    18   
+8              9       Laki    64                    19   
+9             10  Perempuan    30                    19   
+10            11       Laki    67                    19   
+11            12  Perempuan    35                    19   
+12            13  Perempuan    58                    20   
+13            14  Perempuan    24                    20   
+14            15       Laki    37                    20   
+15            16       Laki    22                    20   
+16            17  Perempuan    35                    21   
+17            18       Laki    20                    21   
+18            19       Laki    52                    23   
+19            20  Perempuan    35                    23   
+20            21       Laki    35                    24   
+21            22       Laki    25                    24   
+22            23  Perempuan    46                    25   
+23            24       Laki    31                    25   
+24            25  Perempuan    54                    28   
+25            26       Laki    29                    28   
+26            27  Perempuan    45                    28   
+27            28       Laki    35                    28   
+28            29  Perempuan    40                    29   
+29            30  Perempuan    23                    29   
+..           ...        ...   ...                   ...   
+170          171       Laki    40                    87   
+171          172       Laki    28                    87   
+172          173       Laki    36                    87   
+173          174       Laki    36                    87   
+174          175  Perempuan    52                    88   
+175          176  Perempuan    30                    88   
+176          177       Laki    58                    88   
+177          178       Laki    27                    88   
+178          179       Laki    59                    93   
+179          180       Laki    35                    93   
+180          181  Perempuan    37                    97   
+181          182  Perempuan    32                    97   
+182          183       Laki    46                    98   
+183          184  Perempuan    29                    98   
+184          185  Perempuan    41                    99   
+185          186       Laki    30                    99   
+186          187  Perempuan    54                   101   
+187          188       Laki    28                   101   
+188          189  Perempuan    41                   103   
+189          190  Perempuan    36                   103   
+190          191  Perempuan    34                   103   
+191          192  Perempuan    32                   103   
+192          193       Laki    33                   113   
+193          194  Perempuan    38                   113   
+194          195  Perempuan    47                   120   
+195          196  Perempuan    35                   120   
+196          197  Perempuan    45                   126   
+197          198       Laki    32                   126   
+198          199       Laki    32                   137   
+199          200       Laki    30                   137   
+
+     Rating_pengeluaran (1-100)  Class  
+0                            39      1  
+1                            81      1  
+2                             6      1  
+3                            77      1  
+4                            40      1  
+5                            76      1  
+6                             6      1  
+7                            94      1  
+8                             3      1  
+9                            72      1  
+10                           14      1  
+11                           99      1  
+12                           15      1  
+13                           77      1  
+14                           13      1  
+15                           79      1  
+16                           35      1  
+17                           66      1  
+18                           29      1  
+19                           98      1  
+20                           35      1  
+21                           73      1  
+22                            5      1  
+23                           73      1  
+24                           14      1  
+25                           82      1  
+26                           32      1  
+27                           61      1  
+28                           31      1  
+29                           87      1  
+..                          ...    ...  
+170                          13      0  
+171                          75      2  
+172                          10      0  
+173                          92      2  
+174                          13      0  
+175                          86      2  
+176                          15      0  
+177                          69      2  
+178                          14      0  
+179                          90      2  
+180                          32      0  
+181                          86      2  
+182                          15      0  
+183                          88      2  
+184                          39      0  
+185                          97      2  
+186                          24      0  
+187                          68      2  
+188                          17      0  
+189                          85      2  
+190                          23      0  
+191                          69      2  
+192                           8      0  
+193                          91      2  
+194                          16      0  
+195                          79      2  
+196                          28      0  
+197                          74      2  
+198                          18      0  
+199                          83      2  </code></pre>
+
+<h2 id="hasil-plot">Hasil plot :<a class="headerlink" href="#hasil-plot" title="Permanent link">&para;</a></h2>
+<p><img alt="" src="../assets/images/image3.PNG" /></p>
+<ul>
+<li>Referensi:</li>
+<li><a href="http://www.megabagus.id/machine-learning-k-nearest-neighbors/2/">www.megabagus.id/machine-learning-k-nearest-neighbors/2/</a></li>
+<li><a href="https://www.advernesia.com/blog/data-science/pengertian-dan-cara-kerja-algoritma-k-nearest-neighbours-knn/">https://www.advernesia.com/blog/data-science/pengertian-dan-cara-kerja-algoritma-k-nearest-neighbours-knn/</a></li>
+</ul>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href=".." title="Teori dan dan Cara Kerja Algoritma KNN (K-NEAREST NEIGHBOUR)" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Teori dan dan Cara Kerja Algoritma KNN (K-NEAREST NEIGHBOUR)
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../customization/" title="Decision tree" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Decision tree
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2019 nurulfajriyatussihah
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="../assets/fonts/font-awesome.css">
+    
+      <a href="https://github.com/nurulfajriyatussihah" class="md-footer-social__link fa fa-github-alt"></a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/application.8c0d971c.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
+      
+    
+  </body>
+</html>

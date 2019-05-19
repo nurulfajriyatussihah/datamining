@@ -1,0 +1,965 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="materi data mining">
+      
+      
+        <link rel="canonical" href="https://nurulfajriyatussihah.github.io/datamining/customization/">
+      
+      
+        <meta name="author" content="nurul fajriyatus sihah">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.2.0">
+    
+    
+      
+        <title>Decision tree - Data mining</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/application.750b69bd.css">
+      
+        <link rel="stylesheet" href="../assets/stylesheets/application-palette.224b79ff.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#3f51b5">
+      
+    
+    
+      <script src="../assets/javascripts/modernizr.74668098.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../assets/fonts/material-icons.css">
+    
+    
+    
+      
+        
+<script>
+  window.ga = window.ga || function() {
+    (ga.q = ga.q || []).push(arguments)
+  }
+  ga.l = +new Date
+  /* Setup integration and send page view */
+  ga("create", "None", "auto")
+  ga("set", "anonymizeIp", true)
+  ga("send", "pageview")
+  /* Register handler to log search on blur */
+  document.addEventListener("DOMContentLoaded", () => {
+    if (document.forms.search) {
+      var query = document.forms.search.query
+      query.addEventListener("blur", function() {
+        if (this.value) {
+          var path = document.location.pathname;
+          ga("send", "pageview", path + "?q=" + this.value)
+        }
+      })
+    }
+  })
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="__github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#mengenal-decision-tree" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://nurulfajriyatussihah.github.io/datamining" title="Data mining" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              Data mining
+            </span>
+            <span class="md-header-nav__topic">
+              Decision tree
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/nurulfajriyatussihah/datamining" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    nurulfajriyatussihah/datamining
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+        
+
+<nav class="md-tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  <li class="md-tabs__item">
+    
+      <a href=".." title="Teori dan dan Cara Kerja Algoritma KNN (K-NEAREST NEIGHBOUR)" class="md-tabs__link md-tabs__link--active">
+        Teori dan dan Cara Kerja Algoritma KNN (K-NEAREST NEIGHBOUR)
+      </a>
+    
+  </li>
+
+      
+        
+      
+        
+      
+    </ul>
+  </div>
+</nav>
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://nurulfajriyatussihah.github.io/datamining" title="Data mining" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    Data mining
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/nurulfajriyatussihah/datamining" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    nurulfajriyatussihah/datamining
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href=".." title="Teori dan dan Cara Kerja Algoritma KNN (K-NEAREST NEIGHBOUR)" class="md-nav__link">
+      Teori dan dan Cara Kerja Algoritma KNN (K-NEAREST NEIGHBOUR)
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../getting-started/" title="Algoritma K-Means Clustering" class="md-nav__link">
+      Algoritma K-Means Clustering
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Decision tree
+      </label>
+    
+    <a href="./" title="Decision tree" class="md-nav__link md-nav__link--active">
+      Decision tree
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#pengertian-decision-tree" title="Pengertian Decision Tree" class="md-nav__link">
+    Pengertian Decision Tree
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementasi" title="Implementasi" class="md-nav__link">
+    Implementasi
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hasil-implementasi" title="Hasil Implementasi" class="md-nav__link">
+    Hasil Implementasi
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#pengertian-decision-tree" title="Pengertian Decision Tree" class="md-nav__link">
+    Pengertian Decision Tree
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementasi" title="Implementasi" class="md-nav__link">
+    Implementasi
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hasil-implementasi" title="Hasil Implementasi" class="md-nav__link">
+    Hasil Implementasi
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="mengenal-decision-tree">Mengenal Decision Tree<a class="headerlink" href="#mengenal-decision-tree" title="Permanent link">&para;</a></h1>
+<h2 id="pengertian-decision-tree">Pengertian Decision Tree<a class="headerlink" href="#pengertian-decision-tree" title="Permanent link">&para;</a></h2>
+<p>Decision Trees adalah suatu metode data mining yang bersifat  supervised classification dimana setiap record di dalam suatu dataset  yang akan dimodel harus mempunyai class/category. Misalnya dataset yang  tersedia untuk pemodelan Decision Trees terdiri dari:Jumlah Anggota Rumah Tangga, Jenis Lantai, Jenis Jamban, Luas Lantai, Miskin/Tidak Miskin. Empat variabel pertama disebut dengan predictor dan satu variabel terakhir adalah class atau category.</p>
+<p>Decision trees secara khusus melakukan pemodelan dengan berusaha memodel record yang tersedia ke dalam bentuk pohon keputusan. Dimana dalam  suatu pohon keputusan akan ada interior node yang dilabeli dengan suatu  variabel. Dari setiap interior node akan keluar tanda panah yang  dilabeli dengan nilai dari variabel yang ada pada interior node tersebut. Di bagian  akhir pohon keputusan akan terdapat leaf yang  dilabeli dengan class atau category. Dalam penggunaannya, atau dalam  pengimplementasian model decision trees ini ke dalam suatu sistem (umumnya sistem pendukung keputusan), model pohon keputusan yang didapat perlu diekstrak ke dalam bentuk rule-rule yang berbentuk if – then.</p>
+<p>Decision tree biasanya digunakan dalam riset operasi dan manajemen operasi. Jika, dalam praktiknya, keputusan harus diambil secara online  tanpa penarikan kembali di bawah pengetahuan yang tidak lengkap, sebagai model pilihan terbaik atau algoritma model seleksi online decision tree harus diparalelkan dengan model probabilitas. Penggunaan lain dari  decision ini yaitu sebagai alat deskriptif untuk menghitung probabilitas bersyarat.</p>
+<p>Di antara alat pendukung keputusan lainnya, decision tree memiliki beberapa keunggulan, yaitu:</p>
+<ul>
+<li>Mudah dimengerti dan dipahami. Orang-orang bisa memahami model decision tree dengan penjelasan singkat.</li>
+<li>Memiliki nilai walaupun dengan sedikit data yang rumit. Wawasan  penting dapat dihasilkan berdasarkan para ahli yang menggambarkan  situasi dan preferensi mereka untuk hasil.</li>
+<li>Membantu menentukan nilai terburuk, terbaik, dan nilai yang diharapkan untuk berbagai skenario.</li>
+<li>Menggunakan model kotak putih jika hasil diberikan oleh model.</li>
+<li>Dapat dikombinasikan dengan teknik pengambilan keputusan lainnya.</li>
+</ul>
+<p><strong>Decision tree juga memiliki kekurangan, seperti:</strong></p>
+<ul>
+<li>
+<p>Tidak stabil, yang berarti bahwa  perubahan kecil dalam data dapat menyebabkan perubahan besar dalam  struktur decision tree optimal.</p>
+</li>
+<li>
+<p>Relatif tidak akurat. Banyak prediktor  lain memiliki kinerja yang lebih baik dengan data serupa. Hal ini dapat  diatasi dengan mengganti decision tree tunggal dengan forest of decision  tree acak. Namun hutan yang acak tidak semudah memahami decision tree  tunggal.</p>
+</li>
+<li>
+<p>Untuk data yang termasuk variabel  kategorikal dengan jumlah level yang berbeda, perolehan informasi dalam  decision tree cenderung mendukung atribut dengan level yang lebih  banyak.</p>
+</li>
+<li>
+<p>Perhitungan bisa menjadi sangat kompleks, terutama jika banyak nilai tidak pasti dan / atau jika banyak hasil dikaitkan.</p>
+</li>
+</ul>
+<h2 id="implementasi">Implementasi<a class="headerlink" href="#implementasi" title="Permanent link">&para;</a></h2>
+<p>Menginstall Library</p>
+<pre class="codehilite"><code class="language-python"># Mengimpor library
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+from sklearn.tree import DecisionTreeClassifier # Import Decision Tree Classifier
+from sklearn.model_selection import train_test_split # Import train_test_split function
+from sklearn import metrics #Import scikit-learn metrics module for accuracy calculation
+from sklearn.tree import export_graphviz
+from sklearn.externals.six import StringIO  
+from IPython.display import Image  
+import pydotplus</code></pre>
+
+<p>menginputkan dataset sesuai file yang akan di inputkan</p>
+<pre class="codehilite"><code class="language-python"># Mengimpor dataset
+dataset = pd.read_csv('Iklan_sosmed.csv')</code></pre>
+
+<p>Mengambil nama kolom</p>
+<pre class="codehilite"><code class="language-python">x = dataset[['Kelamin', 'Usia', 'EstimasiGaji']]
+y = dataset[['Beli']]</code></pre>
+
+<p>Membagi dataset menjadi Training  set dan Test set</p>
+<pre class="codehilite"><code class="language-python">from sklearn.model_selection import train_test_split
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size = 0.25, random_state = 0)
+
+x_train</code></pre>
+
+<p>Membuat decision Tree classifer objek </p>
+<pre class="codehilite"><code class="language-python">clf = DecisionTreeClassifier(criterion="entropy", max_depth=3)
+
+# Train Decision Tree Classifer
+clf.fit(x_train,y_train)
+
+#Predict the response for test dataset
+predicted_y = clf.predict(x_test)
+
+clf = DecisionTreeClassifier(criterion="entropy", max_depth=3)
+
+# Train Decision Tree Classifer
+clf.fit(x_train,y_train)
+
+#Predict the response for test dataset
+predicted_y = clf.predict(x_test)</code></pre>
+
+<h2 id="hasil-implementasi">Hasil Implementasi<a class="headerlink" href="#hasil-implementasi" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Kelamin</th>
+<th>Usia</th>
+<th>EstimasiGaji</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>250</td>
+<td>0</td>
+<td>44</td>
+<td>39000</td>
+</tr>
+<tr>
+<td>63</td>
+<td>1</td>
+<td>32</td>
+<td>120000</td>
+</tr>
+<tr>
+<td>312</td>
+<td>0</td>
+<td>38</td>
+<td>50000</td>
+</tr>
+<tr>
+<td>159</td>
+<td>0</td>
+<td>32</td>
+<td>135000</td>
+</tr>
+<tr>
+<td>283</td>
+<td>0</td>
+<td>52</td>
+<td>21000</td>
+</tr>
+<tr>
+<td>340</td>
+<td>0</td>
+<td>53</td>
+<td>104000</td>
+</tr>
+<tr>
+<td>81</td>
+<td>1</td>
+<td>39</td>
+<td>42000</td>
+</tr>
+<tr>
+<td>349</td>
+<td>1</td>
+<td>38</td>
+<td>61000</td>
+</tr>
+<tr>
+<td>153</td>
+<td>0</td>
+<td>36</td>
+<td>50000</td>
+</tr>
+<tr>
+<td>295</td>
+<td>0</td>
+<td>36</td>
+<td>63000</td>
+</tr>
+<tr>
+<td>96</td>
+<td>0</td>
+<td>35</td>
+<td>25000</td>
+</tr>
+<tr>
+<td>89</td>
+<td>1</td>
+<td>35</td>
+<td>50000</td>
+</tr>
+<tr>
+<td>296</td>
+<td>1</td>
+<td>42</td>
+<td>73000</td>
+</tr>
+<tr>
+<td>21</td>
+<td>0</td>
+<td>47</td>
+<td>49000</td>
+</tr>
+<tr>
+<td>365</td>
+<td>0</td>
+<td>59</td>
+<td>29000</td>
+</tr>
+<tr>
+<td>216</td>
+<td>1</td>
+<td>49</td>
+<td>65000</td>
+</tr>
+<tr>
+<td>259</td>
+<td>0</td>
+<td>45</td>
+<td>131000</td>
+</tr>
+<tr>
+<td>49</td>
+<td>0</td>
+<td>31</td>
+<td>89000</td>
+</tr>
+<tr>
+<td>238</td>
+<td>0</td>
+<td>46</td>
+<td>82000</td>
+</tr>
+<tr>
+<td>343</td>
+<td>0</td>
+<td>47</td>
+<td>51000</td>
+</tr>
+<tr>
+<td>92</td>
+<td>1</td>
+<td>26</td>
+<td>15000</td>
+</tr>
+<tr>
+<td>223</td>
+<td>1</td>
+<td>60</td>
+<td>102000</td>
+</tr>
+<tr>
+<td>234</td>
+<td>0</td>
+<td>38</td>
+<td>112000</td>
+</tr>
+<tr>
+<td>232</td>
+<td>1</td>
+<td>40</td>
+<td>107000</td>
+</tr>
+<tr>
+<td>377</td>
+<td>0</td>
+<td>42</td>
+<td>53000</td>
+</tr>
+<tr>
+<td>142</td>
+<td>1</td>
+<td>35</td>
+<td>59000</td>
+</tr>
+<tr>
+<td>22</td>
+<td>1</td>
+<td>48</td>
+<td>41000</td>
+</tr>
+<tr>
+<td>252</td>
+<td>0</td>
+<td>48</td>
+<td>134000</td>
+</tr>
+<tr>
+<td>350</td>
+<td>0</td>
+<td>38</td>
+<td>113000</td>
+</tr>
+<tr>
+<td>168</td>
+<td>1</td>
+<td>29</td>
+<td>148000</td>
+</tr>
+<tr>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr>
+<td>243</td>
+<td>0</td>
+<td>56</td>
+<td>104000</td>
+</tr>
+<tr>
+<td>115</td>
+<td>1</td>
+<td>40</td>
+<td>57000</td>
+</tr>
+<tr>
+<td>265</td>
+<td>0</td>
+<td>42</td>
+<td>108000</td>
+</tr>
+<tr>
+<td>72</td>
+<td>0</td>
+<td>20</td>
+<td>23000</td>
+</tr>
+<tr>
+<td>333</td>
+<td>1</td>
+<td>40</td>
+<td>65000</td>
+</tr>
+<tr>
+<td>25</td>
+<td>1</td>
+<td>47</td>
+<td>20000</td>
+</tr>
+<tr>
+<td>165</td>
+<td>0</td>
+<td>18</td>
+<td>86000</td>
+</tr>
+<tr>
+<td>337</td>
+<td>1</td>
+<td>35</td>
+<td>79000</td>
+</tr>
+<tr>
+<td>384</td>
+<td>0</td>
+<td>57</td>
+<td>33000</td>
+</tr>
+<tr>
+<td>174</td>
+<td>0</td>
+<td>34</td>
+<td>72000</td>
+</tr>
+<tr>
+<td>386</td>
+<td>0</td>
+<td>49</td>
+<td>39000</td>
+</tr>
+<tr>
+<td>39</td>
+<td>0</td>
+<td>27</td>
+<td>31000</td>
+</tr>
+<tr>
+<td>193</td>
+<td>1</td>
+<td>19</td>
+<td>70000</td>
+</tr>
+<tr>
+<td>314</td>
+<td>0</td>
+<td>39</td>
+<td>79000</td>
+</tr>
+<tr>
+<td>88</td>
+<td>1</td>
+<td>26</td>
+<td>81000</td>
+</tr>
+<tr>
+<td>70</td>
+<td>1</td>
+<td>25</td>
+<td>80000</td>
+</tr>
+<tr>
+<td>87</td>
+<td>0</td>
+<td>28</td>
+<td>85000</td>
+</tr>
+<tr>
+<td>292</td>
+<td>1</td>
+<td>55</td>
+<td>39000</td>
+</tr>
+<tr>
+<td>242</td>
+<td>0</td>
+<td>50</td>
+<td>88000</td>
+</tr>
+<tr>
+<td>277</td>
+<td>1</td>
+<td>49</td>
+<td>88000</td>
+</tr>
+<tr>
+<td>211</td>
+<td>1</td>
+<td>52</td>
+<td>150000</td>
+</tr>
+<tr>
+<td>9</td>
+<td>0</td>
+<td>35</td>
+<td>65000</td>
+</tr>
+<tr>
+<td>359</td>
+<td>1</td>
+<td>42</td>
+<td>54000</td>
+</tr>
+<tr>
+<td>195</td>
+<td>1</td>
+<td>34</td>
+<td>43000</td>
+</tr>
+<tr>
+<td>251</td>
+<td>1</td>
+<td>37</td>
+<td>52000</td>
+</tr>
+<tr>
+<td>323</td>
+<td>0</td>
+<td>48</td>
+<td>30000</td>
+</tr>
+<tr>
+<td>192</td>
+<td>1</td>
+<td>29</td>
+<td>43000</td>
+</tr>
+<tr>
+<td>117</td>
+<td>1</td>
+<td>36</td>
+<td>52000</td>
+</tr>
+<tr>
+<td>47</td>
+<td>0</td>
+<td>27</td>
+<td>54000</td>
+</tr>
+<tr>
+<td>172</td>
+<td>0</td>
+<td>26</td>
+<td>118000</td>
+</tr>
+</tbody>
+</table>
+<p>300 rows × 3 columns</p>
+<p><img alt="" src="../assets/images/tree.PNG" /></p>
+<ul>
+<li>Referensi:</li>
+<li><a href="https://garudacyber.co.id/artikel/1545-pengertian-dan-penerapan-decision-tree">https://garudacyber.co.id/artikel/1545-pengertian-dan-penerapan-decision-tree</a></li>
+</ul>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../getting-started/" title="Algoritma K-Means Clustering" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Algoritma K-Means Clustering
+              </span>
+            </div>
+          </a>
+        
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2019 nurulfajriyatussihah
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="../assets/fonts/font-awesome.css">
+    
+      <a href="https://github.com/nurulfajriyatussihah" class="md-footer-social__link fa fa-github-alt"></a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/application.8c0d971c.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
+      
+    
+  </body>
+</html>
